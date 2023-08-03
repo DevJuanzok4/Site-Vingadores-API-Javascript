@@ -122,6 +122,8 @@
     fetch('http://gateway.marvel.com/v1/public/comics?ts=1691088754&apikey=ad5cbc4e7c740d5783c302c8420b770d&hash=b775c9f4ee0447d739732adeee5ca350').then((
       response) => {
       return response.json()
+    }).then((jsonParsed) => {
+      console.Log(jsonParsed);
     })
   </script>
 </body>
