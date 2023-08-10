@@ -117,16 +117,36 @@
 
 
 
-
-  <script type="text/javascript">
-
-    fetch('http://gateway.marvel.com/v1/public/comics?ts=1691088754&apikey=ad5cbc4e7c740d5783c302c8420b770d&hash=b775c9f4ee0447d739732adeee5ca350').then((
-      response) => {
-      return response.json()
-    }).then((jsonParsed) => {
-      console.Log(jsonParsed);
-    })
+  <script>
+    fetch('http://gateway.marvel.com/v1/public/comics?ts=1691088754&apikey=ad5cbc4e7c740d5783c302c8420b770d&hash=b775c9f4ee0447d739732adeee5ca350')
+      .then(response => response.json())
+      .then(jsonParsed => {
+        const comicList = jsonParsed.data.results; // Array de resultados de quadrinhos
+  
+        const comicListContainer = document.getElementById('comic-list');
+  
+        // Loop pelos quadrinhos e cria elementos para exibir os dados
+        comicList.forEach(comic => {
+          const comicElement = document.createElement('div');
+          comicElement.classList.add('comic');
+  
+          const titleElement = document.createElement('h2');
+          titleElement.textContent = comic.title;
+  
+          const descriptionElement = document.createElement('p');
+          descriptionElement.textContent = comic.description || 'No description available.';
+  
+          comicElement.appendChild(titleElement);
+          comicElement.appendChild(descriptionElement);
+  
+          comicListContainer.appendChild(comicElement);
+        });
+      })
+      .catch(error => {
+        console.error('Erro ao buscar e exibir os quadrinhos:', error);
+      });
   </script>
+  
 </body>
 
 </html>
